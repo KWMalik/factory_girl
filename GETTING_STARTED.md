@@ -837,14 +837,41 @@ FactoryGirl.define do
 end
 ```
 
-When using `initialize_with`, attributes accessed from the `initialize_with`
-block are assigned a second time to the instance. Duplicate assignment can be
-disabled by configuring FactoryGirl as such:
+When using `initialize_with`, attributes accessed from within the `initialize_with`
+block are assigned *only* in the constructor; this equates to roughly the
+following code:
 
-    FactoryGirl.duplicate_attribute_assignment_from_initialize_with = false
+```ruby
+FactoryGirl.define do
+  factory :user do
+    initialize_with { new(name) }
 
-This would allow for attributes declared as ignored to not be ignored, since
-it won't assign them for a second time.
+    name { 'value' }
+  end
+end
+
+FactoryGirl.build(:user)
+# runs
+User.new('value')
+```
+
+This prevents duplicate assignment; in versions of FactoryGirl before 4.0, it
+would run this:
+
+```ruby
+FactoryGirl.define do
+  factory :user do
+    initialize_with { new(name) }
+
+    name { 'value' }
+  end
+end
+
+FactoryGirl.build(:user)
+# runs
+user = User.new('value')
+user.name = 'value'
+```
 
 Custom Strategies
 -----------------

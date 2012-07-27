@@ -41,7 +41,6 @@ require 'factory_girl/decorator/attribute_hash'
 require 'factory_girl/decorator/class_key_hash'
 require 'factory_girl/decorator/disallows_duplicates_registry'
 require 'factory_girl/decorator/invocation_tracker'
-require 'factory_girl/decorator/invocation_ignorer'
 require 'factory_girl/decorator/new_constructor'
 require 'factory_girl/version'
 
