@@ -1004,38 +1004,3 @@ config.after(:suite) do
   puts @factory_girl_results
 end
 ```
-
-Cucumber Integration
---------------------
-
-factory\_girl ships with step definitions that make calling factories from Cucumber easier. To use them, add the following to features/support/env.rb:
-
-```ruby
-require "factory_girl/step_definitions"
-```
-
-Note: These step definitions are _deprecated_. Read why here:
-http://robots.thoughtbot.com/post/25650434584/writing-better-cucumber-scenarios-or-why-were
-
-Alternate Syntaxes
-------------------
-
-Users' tastes for syntax vary dramatically, but most users are looking for a
-common feature set. Because of this factory\_girl supports "syntax layers" which
-provide alternate interfaces. See Factory::Syntax for information about the
-various layers available. For example, the Machinist-style syntax is popular:
-
-```ruby
-require "factory_girl/syntax/blueprint"
-require "factory_girl/syntax/make"
-require "factory_girl/syntax/sham"
-
-Sham.email {|n| "#{n}@example.com" }
-
-User.blueprint do
-  name  { "Billy Bob" }
-  email { Sham.email  }
-end
-
-User.make(name: "Johnny")
-```
