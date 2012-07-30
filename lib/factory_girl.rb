@@ -1,5 +1,6 @@
 require 'set'
 require 'active_support/core_ext/module/delegation'
+require 'active_support/deprecation'
 require 'active_support/notifications'
 
 require 'factory_girl/definition_hierarchy'
